@@ -16,12 +16,17 @@ class _PreLoginState extends State<PreLogin> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 236, 9, 0),
         iconTheme: IconThemeData(color: Colors.white),
-        title: Image.asset("santander_nome_login2.png", height: 80),
+        title: Image.asset(
+          "santander_nome_login2.png",
+          height: 60,
+        ),
         centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.place_outlined),
+            child: Icon(
+              Icons.place_outlined,
+            ),
           ),
         ],
       ),
@@ -33,8 +38,10 @@ class _PreLoginState extends State<PreLogin> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset("pessoa_login.jpeg"),
-                  SizedBox(height: 30),
+                  Image.asset(
+                    "pessoa_login.jpeg",
+                  ),
+                  SizedBox(height: 30,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -52,20 +59,26 @@ class _PreLoginState extends State<PreLogin> {
             width: double.maxFinite,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25),
-              ),
+                  topLeft: Radius.circular(25), topRight: Radius.circular(25)),
               color: Colors.white,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.swipe_vertical_outlined, size: 35),
-                SizedBox(width: 15),
-                Text("Pagar ou cobrar", style: TextStyle(fontSize: 16)),
+                Icon(
+                  Icons.swipe_vertical_outlined,
+                  size: 35,
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  "Pagar ou cobrar",
+                  style: TextStyle(fontSize: 16),
+                ),
               ],
             ),
-          ),
+          )
         ],
       ),
     );
