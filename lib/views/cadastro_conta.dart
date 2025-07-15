@@ -46,25 +46,27 @@ class _CadastroContaState extends State<CadastroConta> {
             onPressed: () async {
               await http
                   .post(
-                    Uri.parse("http://localhost:8000/api/usuarios"),
-                    headers: {
-                      "Accept": "application/json",
-                      "Content-Type": "application/json",
-                    },
-                    body: jsonEncode({
-                      "nome": nomeController.text,
-                      "cpf": cpfController.text,
-                      "email": emailController.text,
-                      "senha": senhaController.text,
-                      "telefone": telefoneController.text,
-                    }),
-                  )
+                Uri.parse("http://10.38.0.133:8000/api/usuarios"),
+                headers: {
+                  "Accept": "application/json",
+                  "Content-Type": "application/json"
+                },
+                body: jsonEncode(
+                  {
+                    "nome": nomeController.text,
+                    "cpf": cpfController.text,
+                    "email": emailController.text,
+                    "senha": senhaController.text,
+                    "telefone": telefoneController.text
+                  },
+                ),
+              )
                   .then((http.Response response) {
-                    print(response.statusCode);
-                  });
+                print(response.statusCode);
+              });
             },
             child: Text("Cadastrar"),
-          ),
+          )
         ],
       ),
     );
