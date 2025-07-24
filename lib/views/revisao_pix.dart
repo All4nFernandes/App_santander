@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:app_santander/controllers/pix/pix_controller.dart';
 
 class RevisaoPix extends StatefulWidget {
-  const RevisaoPix({super.key});
+  final double valor;
+
+  RevisaoPix({required this.valor, super.key});
 
   @override
   State<RevisaoPix> createState() => _RevisaoPixState();
@@ -9,6 +12,7 @@ class RevisaoPix extends StatefulWidget {
 
 class _RevisaoPixState extends State<RevisaoPix> {
   bool switchValue = false;
+  PixController pixController = PixController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,9 @@ class _RevisaoPixState extends State<RevisaoPix> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 236, 9, 0),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
           icon: Icon(
             Icons.arrow_back_ios,
             color: Colors.white,
@@ -32,148 +38,193 @@ class _RevisaoPixState extends State<RevisaoPix> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(12),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Para finalizar, confirme os dados",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Para",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                  "Para finalizar, confirme os dados",
+                  style: TextStyle(fontSize: 22),
                 ),
                 SizedBox(
-                  width: 5,
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Para",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Guilherme Viana Vilani",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                  ],
                 ),
                 Text(
-                  "Guilherme Viana Vilani",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  "CPF: ***.489.031-** - NU PAGAMENTOS - IP",
+                  style: TextStyle(
+                    color: Colors.grey.shade800,
+                  ),
+                ),
+                Text(
+                  "Chave: ***.489.031-**",
+                  style: TextStyle(
+                    color: Colors.grey.shade800,
+                  ),
                 ),
                 SizedBox(
-                  width: 5,
+                  height: 10,
                 ),
-              ],
-            ),
-            Text(
-              "CPF: ***.489.031-** - NU PAGAMENTOS - IP",
-              style: TextStyle(
-                color: Colors.grey.shade800,
-              ),
-            ),
-            Text(
-              "Chave: ***.489.031-**",
-              style: TextStyle(
-                color: Colors.grey.shade800,
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Divider(),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Valor",
-              style: TextStyle(color: Colors.grey.shade800),
-            ),
-            Text(
-              "R\$ 100.000,00",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Forma de pagamento",
-              style: TextStyle(color: Colors.grey.shade800),
-            ),
-            Text(
-              "Ag 4317 Cc 16541521561",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Data de envio",
-              style: TextStyle(color: Colors.grey.shade800),
-            ),
-            Text(
-              "Hoje - ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                border: Border.all(width: 1),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              width: double.maxFinite,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Facilite seus envios frequentes",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+                Divider(),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Valor",
+                  style: TextStyle(
+                    color: Colors.grey.shade800,
                   ),
-                  Text(
-                    "Agora você pode programar repetições de transferências que você faz regularmente.",
-                    style: TextStyle(
-                      color: Colors.grey.shade800,
-                    ),
+                ),
+                Text(
+                  "R\$ ${widget.valor}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
                   ),
-                  SizedBox(
-                    height: 5,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Forma de pagamento",
+                  style: TextStyle(
+                    color: Colors.grey.shade800,
                   ),
-                  Divider(),
-                  SizedBox(
-                    height: 5,
+                ),
+                Text(
+                  "Ag 4317 Cc 01010101-8",
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Data de envio",
+                  style: TextStyle(
+                    color: Colors.grey.shade800,
+                  ),
+                ),
+                Text(
+                  "Hoje - ${DateTime.now()}",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  width: double.maxFinite,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Repetir Pix",
+                        "Facilite seus envios frequentes",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
                       ),
-                      Switch(
-                        value: switchValue,
-                        onChanged: (value) {
-                          setState(() {
-                            switchValue = value;
-                          });
-                        },
+                      Text(
+                        "Agora você pode programar repetições de transferências que você faz regularmente.",
+                        style: TextStyle(
+                          color: Colors.grey.shade800,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Divider(),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Repetir Pix",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Switch(
+                            value: switchValue,
+                            onChanged: (value) {
+                              setState(() {
+                                switchValue = value;
+                              });
+                            },
+                          )
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  width: double.maxFinite,
+                  child: Text(
+                    "Confira os dados acima antes de concluir a transação. Após a transferência , esta ação não poderá ser desfeita.",
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  color: Colors.grey, borderRadius: BorderRadius.circular(5)),
-              width: double.maxFinite,
-              child: Text(
-                "Confira os dados acima antes de concluir a transação. Após a transferência, está ação não pode ser desfeita.",
+            GestureDetector(
+              onTap: () {
+                pixController.transferePix();
+                // Navigator.of(context).push(
+                // MaterialPageRoute(
+                // builder: (_) => RevisaoPix(valor: widget.valor),
+                //),
+                // );
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 236, 9, 0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                width: double.maxFinite,
+                child: Text(
+                  "Enviar Agora",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
               ),
             )
           ],
