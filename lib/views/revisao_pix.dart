@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:app_santander/controllers/pix/pix_controller.dart';
+import 'package:app_santander/views/comprovante.dart';
+import 'package:flutter/material.dart';
 
 class RevisaoPix extends StatefulWidget {
-  final double valor;
+  double valor;
 
   RevisaoPix({required this.valor, super.key});
 
@@ -208,9 +209,9 @@ class _RevisaoPixState extends State<RevisaoPix> {
               onTap: () {
                 pixController.transferePix();
                 // Navigator.of(context).push(
-                // MaterialPageRoute(
-                // builder: (_) => RevisaoPix(valor: widget.valor),
-                //),
+                //   MaterialPageRoute(
+                //     builder: (_) => Comprovante(),
+                //   ),
                 // );
               },
               child: Container(

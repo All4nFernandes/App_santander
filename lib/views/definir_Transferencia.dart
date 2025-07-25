@@ -10,6 +10,7 @@ class DefinirTransferencia extends StatefulWidget {
 
 class _DefinirTransferenciaState extends State<DefinirTransferencia> {
   TextEditingController controllerValor = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,7 +106,7 @@ class _DefinirTransferenciaState extends State<DefinirTransferencia> {
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(5),
                       hintText: "Valor",
-                      prefixText: "R\$ ",
+                      // prefixText: "R\$",
                     ),
                     onChanged: (value) {
                       setState(() {
@@ -261,11 +262,14 @@ class _DefinirTransferenciaState extends State<DefinirTransferencia> {
                   onTap: controllerValor.text.isEmpty
                       ? null
                       : () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => RevisaoPix(valor: double.parse(controllerValor.text))));
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => RevisaoPix(
+                                valor: double.parse(controllerValor.text),
+                              ),
+                            ),
+                          );
                         },
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //     builder: (context) => DefinirTransferencia()));
                   child: Container(
                     margin: EdgeInsets.only(top: 18),
                     alignment: Alignment.center,

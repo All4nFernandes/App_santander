@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:app_santander/controllers/request.dart';
 
 class CadastroConta extends StatefulWidget {
   const CadastroConta({super.key});
@@ -16,6 +17,8 @@ class _CadastroContaState extends State<CadastroConta> {
   TextEditingController senhaController = TextEditingController();
   TextEditingController telefoneController = TextEditingController();
   TextEditingController cpfController = TextEditingController();
+
+  Request request = Request();
 
   @override
   Widget build(BuildContext context) {
@@ -44,25 +47,12 @@ class _CadastroContaState extends State<CadastroConta> {
           ),
           ElevatedButton(
             onPressed: () async {
-              await http
-                  .post(
-                Uri.parse("http://10.38.0.133:8000/api/usuarios"),
-                headers: {
-                  "Accept": "application/json",
-                  "Content-Type": "application/json"
-                },
-                body: jsonEncode(
-                  {
-                    "nome": nomeController.text,
-                    "cpf": cpfController.text,
-                    "email": emailController.text,
-                    "senha": senhaController.text,
-                    "telefone": telefoneController.text
-                  },
-                ),
-              )
-                  .then((http.Response response) {
-                print(response.statusCode);
+              request.methodRequest("usuarios", "POST", body: {
+                "nome": nomeController.text,
+                "email": emailController.text,
+                "senha": senhaController.text,
+                "telefone": telefoneController.text,
+                "cpf": cpfController.text
               });
             },
             child: Text("Cadastrar"),
