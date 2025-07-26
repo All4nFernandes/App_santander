@@ -17,7 +17,7 @@ class _PreLoginState extends State<PreLogin> {
         backgroundColor: Color.fromARGB(255, 236, 9, 0),
         iconTheme: IconThemeData(color: Colors.white),
         title: Image.asset(
-          "santander_nome_login2.png",
+          "assets/santander_nome_login2.png",
           height: 60,
         ),
         centerTitle: true,

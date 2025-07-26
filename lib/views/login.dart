@@ -1,3 +1,5 @@
+import 'package:app_santander/controllers/request.dart';
+
 import 'cadastro_conta.dart';
 import 'dashboard.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool vrSwitchCpf = false;
   bool vrSwitchSenha = false;
+  TextEditingController cpfController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
+  Request request = Request();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,7 @@ class _LoginState extends State<Login> {
         backgroundColor: Color.fromARGB(255, 236, 9, 0),
         iconTheme: IconThemeData(color: Colors.white),
         title: Image.asset(
-          "santander_nome_login2.png",
+          "assets/santander_nome_login2.png",
           height: 60,
         ),
         centerTitle: true,
@@ -51,6 +56,7 @@ class _LoginState extends State<Login> {
               height: 15,
             ),
             TextField(
+              controller: cpfController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 label: Text("CPF"),
@@ -76,6 +82,9 @@ class _LoginState extends State<Login> {
               ],
             ),
             TextField(
+              controller: senhaController,
+              obscureText: true,
+              keyboardType: TextInputType.visiblePassword,
               decoration: InputDecoration(
                 label: Text("Senha"),
               ),
@@ -134,9 +143,22 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (ctx) => Dashboard()));
+                  onTap: () async {
+                    dynamic resposta = await request.methodRequest(
+                        "auth/login", "POST", body: {
+                      "cpf": cpfController.text,
+                      "senha": senhaController.text
+                    });
+                    if (resposta["statusCode"] == 200) {
+                      request.token = resposta["body"]["token"];
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (ctx) => Dashboard()));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("CPF ou senha inválidos!"),
+                        backgroundColor: Color.fromARGB(255, 236, 9, 0),
+                      ));
+                    }
                   },
                   child: Container(
                     alignment: Alignment.center,
